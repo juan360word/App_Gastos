@@ -9,6 +9,10 @@ function Form() {
     const [Presupuesto, SetPresupuesto ] = useState(0)
     const {dispatch} = usePrupuesto()
 
+    
+
+
+
     const HandleChase = (e: React.ChangeEvent<HTMLInputElement>)  => {
         const Decimal = e.target.value.replace(/\D/g, "")
         SetPresupuesto(e.target.valueAsNumber),
