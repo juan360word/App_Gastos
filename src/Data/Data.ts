@@ -1,5 +1,11 @@
 
-export const categories = [
+// Importaciones
+
+import type { categoriaData } from "../Types/type";
+
+
+
+export const categories: categoriaData[] = [
     { id: '1', name: 'Ahorro', icon: 'ahorro' },
     { id: '2', name: 'Comida', icon: 'comida' },
     { id: '3', name: 'Casa', icon: 'casa' },

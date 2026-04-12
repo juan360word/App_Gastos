@@ -7,6 +7,7 @@ import { useMemo } from "react"
 import  TackerPresupuesto from "./TackerPresupuesto"
 import ExpenseModal from "./CuadroModal"
 
+
 function Cuadro_Info() {
 
   const {state} = usePrupuesto()  
@@ -18,7 +19,7 @@ function Cuadro_Info() {
         {ValidacionApp ? <TackerPresupuesto/> : <Form/>}
     </div>
     {ValidacionApp && (
-      <main className="">
+      <main>
         <ExpenseModal/>
       </main>
       
