@@ -7,7 +7,7 @@ import { usePrupuesto } from "../Hook/usePresupuesto"
 
 function Form() {
     const [Presupuesto, SetPresupuesto ] = useState(0)
-    const {dispatch} = usePrupuesto()
+    const {dispatch,TotalGasto,DisponbleGasto} = usePrupuesto()
 
     
 
@@ -25,9 +25,11 @@ function Form() {
 
     const HandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log('MUESTRA de que sirve')
+        
         dispatch({type: 'Agregar' ,payload :{Presupuesto}})
     }
+
+   
 
   return (
     <>

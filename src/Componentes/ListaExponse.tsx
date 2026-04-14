@@ -2,7 +2,7 @@
 // Importaciones 
 
 
-import { useMemo } from "react"
+import { useEffect, useMemo } from "react"
 import { usePrupuesto } from "../Hook/usePresupuesto"
 import { GastosVista } from "./GastosVista"
 
@@ -10,22 +10,36 @@ import { GastosVista } from "./GastosVista"
 
 export const ListaExponse = () => {
     const {state} = usePrupuesto()
+    
+    const gastosFiltrados = useMemo(
+      () =>
+        state.Filtro
+          ? state.Gastos.filter((item) => item.categoria === state.Filtro)
+          : state.Gastos,
+      [state.Gastos, state.Filtro]
+    )
 
-    const MuestraValidad = useMemo(() => state.Gastos.length === 0 ,[state.Gastos])
+    const MuestraValidad = useMemo(() => state.isDefinido && gastosFiltrados.length === 0 ,[gastosFiltrados,state.isDefinido])
 
+      useEffect(() => {
+        localStorage.setItem('Presupuesto', state.Gastos.toString())
+        localStorage.setItem('Expense', JSON.stringify(state.Gastos))
+      },[state])
   return (
     <>
     
     <div className="mt-10">
-        {MuestraValidad ? <p className="text-2xl text-gray-400 text-center font-black">No se tiene gastos</p> :(
-            <>
+    {!state.isDefinido ? null : MuestraValidad ? (
+        <p className="text-2xl text-gray-400 text-center font-black">No se tiene gastos</p>
+    ) : (
+        <>
             <p className="text-2xl text-gray-400 font-black text-center mt-10 my-5">Listado de Gastos</p>
-            {state.Gastos.map((item) => (
-                <GastosVista  key={item.id} gasto={item} />
+            {gastosFiltrados.map((item) => (
+                <GastosVista key={item.id} gasto={item} />
             ))}
-            </>
-        )}
-    </div>
+        </>
+    )}
+</div>
     </>
   )
 }

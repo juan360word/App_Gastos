@@ -12,27 +12,38 @@ import { usePrupuesto } from "../Hook/usePresupuesto";
 
 
 
+
 export const ModalForm = () => {
     const {state} = usePrupuesto()
+    const [PreMonto,SetMonto] = useState(0)
+
 
     useEffect(()=> {
         if(state.Editar){
             const EditarGasto = state.Gastos.filter(item => item.id === state.Editar)[0]
             SetGastos(EditarGasto)
+            SetMonto(EditarGasto.monto)
         }
       
       },[state.Editar])
+
+
+      
+
+      
+
 
     const [Gastos, SetGastos] = useState<DateplusExpense>({
         monto: 0,
         ExpenseMo: "",
         categoria: "",
         Fecha: new Date(),
+
     });
 
       
 
-    const {dispatch} = usePrupuesto()
+    const {dispatch,DisponbleGasto,TotalGasto} = usePrupuesto()
     const [Error,SetError] = useState('')
 
     const HandleChangeFecha = (value: Value) => {
@@ -48,9 +59,20 @@ export const ModalForm = () => {
             return
         }
         
-        // Aca se agreagara un nuevo Gasto
+        if((Gastos.monto - PreMonto) > DisponbleGasto){
+            SetError('Se sale del presupuesto...')
+            return
+        }
+
+        // Aca se agreagara un nuevo Gasto o Se Actualizara
+
+        if(state.Editar){
+            dispatch({type: 'Actualizacion Lista',payload: {Expense: {id: state.Editar,...Gastos}}})
+      }else{
         dispatch({type: 'ValorAgregado',payload: {Presupuesto: Gastos}})
+      }
         
+
         // Reiniciar 
         SetGastos({
             monto: 0,
@@ -58,17 +80,15 @@ export const ModalForm = () => {
             categoria: "",
             Fecha: new Date(),
         })
-        
-        
 
-     
+        SetMonto(0) 
    }
 
     return (
         <>
             <form className=" space-y-5" onSubmit={handleEnvio }>
                 <legend className=" text-center text-3xl font-black py-2">
-                    Nuevo gasto
+                  {state.Editar ? 'Editar Cambios' : 'Nuevo gasto'}
                 </legend>
                  {Error && <ErrorMensaje>{Error}</ErrorMensaje>}
                 <div className="flex flex-col gap-2.5">
@@ -149,7 +169,7 @@ export const ModalForm = () => {
                 <input
                     type="submit"
                     className="w-full bg-blue-500 p-2 my-3 text-2xl text-white font-bold cursor-pointer rounded-xl"
-                    value="Ingresar Nuevo Gasto"
+                    value={state.Editar ? 'Editar Cambios' : 'Registrar Gastos'}
                 />
             </form>
         </>

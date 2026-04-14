@@ -20,7 +20,10 @@ export type PresupuestoActions =
     {type : 'Cerrar-Modal'} | 
     {type : 'ValorAgregado',payload:{Presupuesto :DateplusExpense}} |
     {type : 'Eliminar gasto',payload:{id: Expense['id']}} |
-    {type : 'Actualizar Gasto',payload:{id: Expense['id']}}
+    {type : 'Actualizar Gasto',payload:{id: Expense['id']}} |
+    {type : 'Actualizacion Lista',payload: {Expense: Expense}} |
+    {type : 'Reiniciar'} |
+    {type : 'Filtrar ',payload: {id: Expense['id']}}
 
 
 export type PresupuestoState = {
@@ -28,15 +31,28 @@ export type PresupuestoState = {
     Modal:boolean
     Gastos: Expense[]
     Editar: Expense['id']
+    isDefinido: boolean 
+    Filtro: Expense['id']
+}
+
+const Guardar = ()  : number => {
+    const LocalStorage = localStorage.getItem('Presupuesto')
+    return LocalStorage ? +LocalStorage : 0
+}
+
+const GuardarGastos = ()  : Expense[] => {
+    const LocalStorageExpenses = localStorage.getItem('Expense')
+    return LocalStorageExpenses ? JSON.parse(LocalStorageExpenses) : []
 }
 
 
-
 export const InitialState : PresupuestoState =  {
-    Presupuesto : 0,
+    Presupuesto : Guardar(),
     Modal:false,
-    Gastos: [],
-    Editar: ''
+    Gastos: GuardarGastos(),
+    Editar: '',
+    isDefinido: Guardar() > 0,
+    Filtro: ''
 }
 
 export const PresupuestoReduce = (
@@ -48,7 +64,8 @@ export const PresupuestoReduce = (
     if(actions.type === 'Agregar'){
             return {
                 ...state,
-                Presupuesto: actions.payload.Presupuesto
+                Presupuesto: actions.payload.Presupuesto,
+                isDefinido: true 
             }
     }
     if(actions.type === 'CuadroModal'){
@@ -56,13 +73,17 @@ export const PresupuestoReduce = (
             ...state,
             Modal:true
         }
-        
+
     }
+
+
+   
 
     if(actions.type === 'Cerrar-Modal') {
         return {
             ...state,
-            Modal: false
+            Modal: false   ,
+            Editar: ''
         }
     }
     if (actions.type === "ValorAgregado") {
@@ -78,10 +99,22 @@ export const PresupuestoReduce = (
         
     }
 
+
+    if(actions.type === 'Reiniciar'){
+        return {
+            ...state,
+            Presupuesto : 0,
+            Gastos: [],
+          
+        }
+    }
+
+
+
     if(actions.type === 'Eliminar gasto'){
         return{
             ...state,
-            gastos: state.Gastos.filter(gasto => gasto.id !==  actions.payload.id)
+            Gastos: state.Gastos.filter(gasto => gasto.id !==  actions.payload.id)
         }
     }
 
@@ -93,7 +126,23 @@ export const PresupuestoReduce = (
         }
     }
     
+    if(actions.type === 'Actualizacion Lista'){
+        return {
+            ...state,
+            Gastos: state.Gastos.map((gasto) =>
+                gasto.id === actions.payload.Expense.id ? actions.payload.Expense : gasto
+            ),
+            Modal:false,
+            Editar: ''
+        }
+    }
     
+    if(actions.type === 'Filtrar '){
+        return {
+            ...state,
+            Filtro: actions.payload.id
+        }
+    }
 
     return state
 }

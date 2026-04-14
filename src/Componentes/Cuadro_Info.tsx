@@ -6,12 +6,15 @@ import { usePrupuesto } from "../Hook/usePresupuesto"
 import { useMemo } from "react"
 import  TackerPresupuesto from "./TackerPresupuesto"
 import ExpenseModal from "./CuadroModal"
+import Filtro from "./Filtro"
 
 
 function Cuadro_Info() {
 
   const {state} = usePrupuesto()  
   const ValidacionApp = useMemo(() => state.Presupuesto > 0 ,[state.Presupuesto])
+
+  
 
   return (
     <>
@@ -20,6 +23,7 @@ function Cuadro_Info() {
     </div>
     {ValidacionApp && (
       <main>
+        <Filtro/>
         <ExpenseModal/>
       </main>
       
