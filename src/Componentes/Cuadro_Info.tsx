@@ -18,7 +18,7 @@ function Cuadro_Info() {
 
   return (
     <>
-    <div className=" mx-auto max-w-3xl shadow-xl/24 shadow-black bg-[#393027] rounded-3xl mt-12 p-12">
+    <div className=" mx-auto max-w-3xl shadow-xl/24 shadow-black bg-[#112240] rounded-3xl mt-12 p-12">
         {ValidacionApp ? <TackerPresupuesto/> : <Form/>}
     </div>
     {ValidacionApp && (

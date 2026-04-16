@@ -105,7 +105,10 @@ export const PresupuestoReduce = (
             ...state,
             Presupuesto : 0,
             Gastos: [],
-          
+            isDefinido: false,
+            Filtro: '',
+            Editar: '',
+            Modal: false,
         }
     }
 

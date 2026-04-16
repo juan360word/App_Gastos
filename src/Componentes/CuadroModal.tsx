@@ -13,12 +13,12 @@ export default function ExpenseModal() {
 
   return (
     <>
-      <div className="fixed right-5 bottom-5 flex items-center justify-center">
+      <div className="fixed right-5 bottom-5 flex mx-auto items-center justify-center">
         <button
           type="button"
           onClick={() => dispatch({type: 'CuadroModal'})}
         >
-          <PlusCircleIcon className='w-16 h-16 text-blue-600 rounded-full' />
+          <PlusCircleIcon className='w-16 h-16 cursor-pointer mx-auto text-blue-600 rounded-full' />
         </button>
       </div>
 

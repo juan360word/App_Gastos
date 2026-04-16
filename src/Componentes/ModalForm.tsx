@@ -1,3 +1,6 @@
+
+// importaciones
+
 import { categories } from "../Data/Data";
 import DatePicker from "react-date-picker";
 import type { Value } from "react-date-picker/dist/shared/types.js";
@@ -7,7 +10,6 @@ import { useEffect, useState } from "react";
 import type { DateplusExpense } from "../Types/type";
 import ErrorMensaje from "./ErrorMensaje";
 import { usePrupuesto } from "../Hook/usePresupuesto";
-
 
 
 
@@ -41,9 +43,9 @@ export const ModalForm = () => {
 
     });
 
-      
+   
 
-    const {dispatch,DisponbleGasto,TotalGasto} = usePrupuesto()
+    const {dispatch,DisponbleGasto} = usePrupuesto()
     const [Error,SetError] = useState('')
 
     const HandleChangeFecha = (value: Value) => {
@@ -117,17 +119,20 @@ export const ModalForm = () => {
                     </label>
                     <input
                         type="text"
-                        value={Gastos.monto === 0 ? "" : String(Gastos.monto)}
+                        value={Gastos.monto === 0 ? "" : Gastos.monto.toLocaleString('es-CO')}
                         onChange={(e) => {
                             const raw = e.target.value.replace(/\D/g, "");
                             SetGastos((prev) => ({
                                 ...prev,
                                 monto: raw === "" ? 0 : Number(raw),
+                                
+                                
                             }));
                         }}
                         id="CantidadModal"
                         placeholder="Agregar Cantidad"
                         className=" p-2 bg-slate-100"
+                        
 
                     />
                 </div>
@@ -155,14 +160,14 @@ export const ModalForm = () => {
                     </select>
                 </div>
 
-                <div className="flex flex-col gap-2.5">
+                <div className="flex flex-col gap-2.5 relative">
                     <label htmlFor="FechaModal" className="text-xl">
                         Fecha De Los Gastos
                     </label>
                     <DatePicker
                         onChange={HandleChangeFecha}
                         value={Gastos.Fecha}
-                        className=" bg-slate-100  flex justify-center "
+                        className=" bg-slate-100  flex justify-center absolute z-50 "
                     />
                 </div>
 

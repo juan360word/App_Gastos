@@ -13,4 +13,11 @@
 }
 .swipeable-list .swipe-action {
   @apply flex justify-center items-center
+
+
+}
+
+
+body{
+  background-color: #0A1628;
 }

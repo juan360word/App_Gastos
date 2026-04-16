@@ -9,7 +9,7 @@ type childrenprop = {
 const ErrorMensaje = ({children} :childrenprop) => {
   return (
     <>
-        <p className="p-2.5 bg-red-500 text-white font-bold  text-center">
+        <p className="p-2.5 bg-red-500 rounded-lg text-white font-bold  text-center">
             {children}
         </p>
     </>

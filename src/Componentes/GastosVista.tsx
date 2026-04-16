@@ -85,16 +85,16 @@ export const GastosVista = ({ gasto }: GastosVistaProps) => {
         leadingActions={leadingActions()}
         trailingActions={trailingActions()}
       >
-  <div className="mt-20 shadow-lg p-10 bg-gray-300 max-w-3xl rounded-3xl mx-auto border-b border-gray-400 flex items-center gap-8">
+  <div className="mt-20 shadow-lg p-10 bg-[#112240] max-w-3xl rounded-3xl mx-auto border-b border-gray-400 flex items-center gap-8">
     
     <div className="shrink-0">
-      <img src={`/icono_${CategoriaInfo.icon}.svg`} alt="icon gasto" className="w-20 h-20 object-contain" />
+      <img src={`/icono_${CategoriaInfo.icon}.svg`} alt="icon gasto" className="w-20 h-20 object-contain mx-auto" />
     </div>
 
-    <div className="flex-1 space-y-1">
-      <p className="text-xl font-bold text-gray-800">{CategoriaInfo.name}</p>
-      <p className="text-gray-600 text-sm">{gasto.ExpenseMo}</p>
-      <p className="text-gray-500 text-sm">{fechaTexto}</p>
+    <div className="flex-1 space-y-1 mx-auto">
+      <p className="text-xl font-bold text-white">{CategoriaInfo.name}</p>
+      <p className="text-white text-sm">{gasto.ExpenseMo}</p>
+      <p className="text-white text-sm">{fechaTexto}</p>
     </div>
 
     <div className="shrink-0">

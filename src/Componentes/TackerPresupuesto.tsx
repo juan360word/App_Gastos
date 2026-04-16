@@ -16,9 +16,9 @@ function TackerPresupuesto() {
 
   return (
     <>
-    <div className="grid grid-cols-1  md:grid-cols-2 gap-5  ">
+    <div className="grid grid-cols-1   md:grid-cols-2 gap-5  ">
         <div className="flex justify-center">
-            <CircularProgressbar
+            <CircularProgressbar 
               value={porcentaje}
               styles={buildStyles({
                 pathColor: porcentaje === 100 ? '' : '' ,
@@ -26,7 +26,7 @@ function TackerPresupuesto() {
                 textSize: 8,
                 textColor: porcentaje === 100 ? '' : ''
               })}
-              text={`${ porcentaje} % gastado`}
+              text={`${ porcentaje} % Del Gasto`}
             />
         </div>
         <div className="flex flex-col justify-center  items-center  gap-8">
@@ -34,7 +34,7 @@ function TackerPresupuesto() {
                     Reiniciar App
                 </button>
 
-               <DisplayA label='Presupuesto' Monto={state.Presupuesto} />
+               <DisplayA label='Presupuesto'  Monto={state.Presupuesto} />
                 <DisplayA label='Disponible' Monto={DisponbleGasto}/>
                 <DisplayA label='Gastado' Monto={TotalGasto}/>  
         </div>

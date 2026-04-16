@@ -1,18 +1,19 @@
 
 // Importaciones
 
-type  DisplayAProp = {
+export type  DisplayAProp = {
     label?: string,
     Monto:number
 }
 
-export const DisplayA = ({label,Monto} : DisplayAProp) => {
+export const DisplayA = ({label,Monto = 0} : DisplayAProp) => {
+  const formatted = Monto.toLocaleString('es-CO')
   return (
     <>
-        <p className="text-2xl  font-black text-white">
-            {label ? <span className="text-white text-2xl">{label}  {''}: </span> : null}
-            <span className="text-white text-2xl">
-                ${Monto}
+        <p  className="text-2xl mx-auto  font-black text-white">
+            {label ? <span className=" text-[#C9956B] mx-auto  text-2xl" >{label}  {''}: </span> : null}
+            <span className=" text-white mx-auto text-2xl" >
+                ${formatted}
             </span>
         </p>
     </>

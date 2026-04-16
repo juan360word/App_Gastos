@@ -30,10 +30,10 @@ export const ListaExponse = () => {
     
     <div className="mt-10">
     {!state.isDefinido ? null : MuestraValidad ? (
-        <p className="text-2xl text-gray-400 text-center font-black">No se tiene gastos</p>
+        <p className="text-2xl text-[#C9956B] text-center font-black">No se tiene gastos</p>
     ) : (
         <>
-            <p className="text-2xl text-gray-400 font-black text-center mt-10 my-5">Listado de Gastos</p>
+            <p className="text-2xl text-[#C9956B] font-black text-center mt-10 my-5">Listado de Gastos</p>
             {gastosFiltrados.map((item) => (
                 <GastosVista key={item.id} gasto={item} />
             ))}

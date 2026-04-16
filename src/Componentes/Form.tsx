@@ -7,7 +7,7 @@ import { usePrupuesto } from "../Hook/usePresupuesto"
 
 function Form() {
     const [Presupuesto, SetPresupuesto ] = useState(0)
-    const {dispatch,TotalGasto,DisponbleGasto} = usePrupuesto()
+    const {dispatch} = usePrupuesto()
 
     
 
@@ -35,15 +35,15 @@ function Form() {
     <>
     <form action="" className="space-y-5" onSubmit={HandleSubmit}>
         <div className="flex flex-col space-y-5 ">
-            <label htmlFor="Gurned" className="text-center text-4xl text-white tracking-widest font-bold ">Definicion Del Presupuesto</label>
-            <input type="number" className="max-w-5xl p-2 m-5 border rounded-xl  border-white bg-white mx-auto" 
+            <label htmlFor="Gurned" className="text-center text-4xl text-[#C9956B] tracking-widest font-bold ">¿Cuánto tienes?</label>
+            <input type="number" className="max-w-5xl p-2 m-5 border rounded-xl text-[#F0F4FF] border-[#E8B89A] bg-[#112240] mx-auto" 
                 placeholder="Ingresa tu Dinero"
                 name="Gurned"
                 value={Presupuesto.toLocaleString("es-CO")}
                 onChange={HandleChase}
             />
         </div>
-        <input type="submit" disabled={Validacion} value={'Definicion Del Dinero'} className="w-full border bg-white p-2 tracking-widest font-black cursor-pointer disabled:opacity-30  " />
+        <input type="submit" disabled={Validacion} value={'Comenzar'} className="w-full  bg-white  hover:bg-[#A87550] hover:text-white p-2 tracking-widest  rounded-lg font-black cursor-pointer disabled:opacity-30  " />
     </form>
     </>
   )

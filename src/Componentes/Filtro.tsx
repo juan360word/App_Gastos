@@ -10,11 +10,11 @@ const Filtro = () => {
     }
 
   return (
-    <div className="text-2xl text-gray-400 font-black text-center mt-10 my-5">
+    <div className="text-2xl text-[#C9956B] font-black text-center mt-10 my-5">
             <form action="">
-                <div className="flex flex-col md:flex-row md:items-center gap 5">
+                <div className="">
                     <label htmlFor="category"> Filtro De Gastos
-                        <select id='category' value={state.Filtro} onChange={Handle} className="bg-slate-100 p-3 flex-1 rounded">
+                        <select id='category' value={state.Filtro} onChange={Handle} className="  p-3 flex-1 rounded">
                             <option value="">Todas las categorias</option>
                             {categories.map((item)=> (
                                 <option value={item.id} key={item.id}>
